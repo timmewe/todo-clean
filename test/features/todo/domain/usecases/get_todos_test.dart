@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_clean/core/error/failures.dart';
+import 'package:todo_clean/core/usecases/use_case_interface.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/domain/repositories/todo_repository.dart';
 import 'package:todo_clean/features/todo/domain/usecases/get_todos.dart';
@@ -26,7 +27,7 @@ void main() {
     when(repository.getTodos()).thenAnswer((_) async => const Left(todos));
 
     // act
-    final result = await usecase.execute();
+    final result = await usecase(NoParams());
 
     // assert
     expect(result, const Left<List<Todo>, Failure>(todos));
