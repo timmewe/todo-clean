@@ -32,6 +32,7 @@ linter:
     prefer_expression_function_bodies: false
     public_member_api_docs: false
     lines_longer_than_80_chars: false
+    flutter_style_todos: false
     always_use_package_imports: false
     sort_constructors_first: false
     sort_pub_dependencies: false

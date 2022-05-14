@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:todo_clean/core/error/failures.dart' as _i3;
 import 'package:todo_clean/features/todo/domain/entities/todo.dart' as _i6;
-import 'package:todo_clean/features/todo/domain/repositories/todo_repository.dart'
+import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart'
     as _i4;
 
 // ignore_for_file: type=lint
@@ -28,7 +28,7 @@ class _FakeFailure_1 extends _i1.Fake implements _i3.Failure {}
 /// A class which mocks [TodoRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTodoRepository extends _i1.Mock implements _i4.TodoRepository {
+class MockTodoRepository extends _i1.Mock implements _i4.ITodoRepository {
   MockTodoRepository() {
     _i1.throwOnMissingStub(this);
   }
