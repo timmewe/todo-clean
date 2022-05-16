@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_clean/core/error/exceptions.dart';
 import 'package:todo_clean/core/error/failures.dart';
-import 'package:todo_clean/core/platform/network_info.dart';
+import 'package:todo_clean/core/network/network_info.dart';
 import 'package:todo_clean/features/todo/data/datasources/todo_local_datascource.dart';
 import 'package:todo_clean/features/todo/data/datasources/todo_remote_datasource.dart';
 import 'package:todo_clean/features/todo/data/models/todo_model.dart';

@@ -5,7 +5,7 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:todo_clean/core/platform/network_info.dart' as _i6;
+import 'package:todo_clean/core/network/network_info.dart' as _i6;
 import 'package:todo_clean/features/todo/data/datasources/todo_local_datascource.dart'
     as _i5;
 import 'package:todo_clean/features/todo/data/datasources/todo_remote_datasource.dart'
