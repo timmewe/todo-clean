@@ -9,10 +9,10 @@ import 'get_todos_test.mocks.dart';
 
 void main() {
   late final AddTodo usecase;
-  late final MockTodoRepository repository;
+  late final MockITodoRepository repository;
 
   setUp(() {
-    repository = MockTodoRepository();
+    repository = MockITodoRepository();
     usecase = AddTodo(repository);
   });
 

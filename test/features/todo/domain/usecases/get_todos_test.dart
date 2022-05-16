@@ -13,10 +13,10 @@ import 'get_todos_test.mocks.dart';
 @GenerateMocks([ITodoRepository])
 void main() {
   late final GetTodos usecase;
-  late final MockTodoRepository repository;
+  late final MockITodoRepository repository;
 
   setUp(() {
-    repository = MockTodoRepository();
+    repository = MockITodoRepository();
     usecase = GetTodos(repository);
   });
 
