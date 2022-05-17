@@ -5,7 +5,6 @@ part 'todo_table.g.dart';
 
 @HiveType(typeId: 0)
 class TodoTable extends Todo {
-
   @override
   @HiveField(0)
   final int id;

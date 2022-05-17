@@ -7,7 +7,8 @@ import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  const tTodoModel = TodoModel(id: 1, title: "delectus aut autem", completed: false);
+  const tTodoModel =
+      TodoModel(id: 1, title: "delectus aut autem", completed: false);
 
   test("Should be a subclass of Todo entity", () async {
     // assert
@@ -25,12 +26,17 @@ void main() {
     expect(result, tTodoModel);
   });
 
-  test("toJson should return a valid json map containing the proper data", () async {
+  test("toJson should return a valid json map containing the proper data",
+      () async {
     // act
     final result = tTodoModel.toJson();
 
     // assert
-    final expectedMap = {'id': 1, 'title': 'delectus aut autem', 'completed': false};
+    final expectedMap = {
+      'id': 1,
+      'title': 'delectus aut autem',
+      'completed': false
+    };
     expect(result, expectedMap);
   });
 }
