@@ -40,3 +40,4 @@ linter:
     prefer_relative_imports: false
     library_prefixes: false
     one_member_abstracts: false
+    overridden_fields: false

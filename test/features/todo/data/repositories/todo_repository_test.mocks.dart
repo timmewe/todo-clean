@@ -73,21 +73,6 @@ class MockITodoLocalDatasource extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#saveTodos, [todos]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
-  @override
-  _i4.Future<void> saveTodo(_i2.Todo? todo) =>
-      (super.noSuchMethod(Invocation.method(#saveTodo, [todo]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
-  @override
-  _i4.Future<void> deleteTodo(_i2.Todo? todo) =>
-      (super.noSuchMethod(Invocation.method(#deleteTodo, [todo]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
-  @override
-  _i4.Future<void> markCompleted(int? id) =>
-      (super.noSuchMethod(Invocation.method(#markCompleted, [id]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }
 
 /// A class which mocks [INetworkInfo].
