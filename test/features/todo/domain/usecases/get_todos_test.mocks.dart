@@ -8,8 +8,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:todo_clean/core/error/failures.dart' as _i6;
 import 'package:todo_clean/features/todo/domain/entities/todo.dart' as _i5;
-import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart'
-    as _i3;
+import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -34,9 +33,9 @@ class MockITodoRepository extends _i1.Mock implements _i3.ITodoRepository {
   @override
   _i4.Future<_i2.Either<List<_i5.Todo>, _i6.Failure>> getTodos() =>
       (super.noSuchMethod(Invocation.method(#getTodos, []),
-          returnValue: Future<_i2.Either<List<_i5.Todo>, _i6.Failure>>.value(
-              _FakeEither_0<List<_i5.Todo>, _i6.Failure>())) as _i4
-          .Future<_i2.Either<List<_i5.Todo>, _i6.Failure>>);
+              returnValue: Future<_i2.Either<List<_i5.Todo>, _i6.Failure>>.value(
+                  _FakeEither_0<List<_i5.Todo>, _i6.Failure>()))
+          as _i4.Future<_i2.Either<List<_i5.Todo>, _i6.Failure>>);
   @override
   _i4.Future<_i2.Either<_i5.Todo, _i6.Failure>> addTodo(_i5.Todo? todo) =>
       (super.noSuchMethod(Invocation.method(#addTodo, [todo]),
@@ -44,9 +43,9 @@ class MockITodoRepository extends _i1.Mock implements _i3.ITodoRepository {
                   _FakeEither_0<_i5.Todo, _i6.Failure>()))
           as _i4.Future<_i2.Either<_i5.Todo, _i6.Failure>>);
   @override
-  _i4.Future<_i6.Failure?> deleteTodo(int? id) => (super.noSuchMethod(
-      Invocation.method(#deleteTodo, [id]),
-      returnValue: Future<_i6.Failure?>.value()) as _i4.Future<_i6.Failure?>);
+  _i4.Future<_i6.Failure?> deleteTodo(int? id) =>
+      (super.noSuchMethod(Invocation.method(#deleteTodo, [id]),
+          returnValue: Future<_i6.Failure?>.value()) as _i4.Future<_i6.Failure?>);
   @override
   _i4.Future<_i2.Either<_i5.Todo, _i6.Failure>> markCompleted(int? id) =>
       (super.noSuchMethod(Invocation.method(#markCompleted, [id]),

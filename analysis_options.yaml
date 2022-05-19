@@ -41,3 +41,4 @@ linter:
     library_prefixes: false
     one_member_abstracts: false
     overridden_fields: false
+    unnecessary_lambdas: false
