@@ -16,16 +16,20 @@ import 'package:todo_clean/features/todo/presentation/bloc/todos_bloc.dart';
 
 final GetIt serviceLocator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   _initFeatures();
   _initCore();
-  _initExternal();
+  await _initExternal();
 }
 
 void _initFeatures() {
   serviceLocator
-    ..registerFactory(() => TodosBloc(getTodos: serviceLocator()))
-    ..registerLazySingleton(() => GetTodosUsecase(serviceLocator()))
+    ..registerLazySingleton<ITodoRemoteDatasource>(
+      () => ChopperTodoRemoteDatasource(api: serviceLocator<TodoApi>()),
+    )
+    ..registerLazySingleton<ITodoLocalDatasource>(
+      () => HiveTodoLocalDatasource(box: serviceLocator()),
+    )
     ..registerLazySingleton<ITodoRepository>(
       () => TodoRepository(
         remoteDatasource: serviceLocator(),
@@ -33,12 +37,8 @@ void _initFeatures() {
         networkInfo: serviceLocator(),
       ),
     )
-    ..registerLazySingleton<ITodoRemoteDatasource>(
-      () => ChopperTodoRemoteDatasource(api: serviceLocator()),
-    )
-    ..registerLazySingleton<ITodoLocalDatasource>(
-      () => HiveTodoLocalDatasource(box: serviceLocator()),
-    );
+    ..registerLazySingleton<GetTodosUsecase>(() => GetTodosUsecase(serviceLocator()))
+    ..registerFactory<TodosBloc>(() => TodosBloc(getTodos: serviceLocator()));
 }
 
 void _initCore() {
@@ -54,11 +54,12 @@ void _initChopper() {
     ],
   );
 
-  serviceLocator.registerSingleton(() => TodoApi.create(chopper));
+  serviceLocator.registerLazySingleton<TodoApi>(() => TodoApi.create(chopper));
 }
 
-void _initExternal() {
+Future<void> _initExternal() async {
+  final todoBox = await Hive.openBox<TodoTable>('name');
   serviceLocator
-    ..registerLazySingletonAsync(() async => Hive.openBox<TodoTable>('name'))
-    ..registerLazySingleton(() => InternetConnectionChecker());
+    ..registerLazySingleton<Box<TodoTable>>(() => todoBox)
+    ..registerLazySingleton<InternetConnectionChecker>(() => InternetConnectionChecker());
 }
