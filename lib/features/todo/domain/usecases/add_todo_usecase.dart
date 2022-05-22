@@ -5,10 +5,10 @@ import 'package:todo_clean/core/usecases/use_case_interface.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
 
-class AddTodo implements IUseCase<Todo, Params> {
+class AddTodoUsecase implements IUseCase<Todo, Params> {
   final ITodoRepository repository;
 
-  AddTodo(this.repository);
+  AddTodoUsecase(this.repository);
 
   @override
   Future<Either<Todo, Failure>> call(Params params) async {

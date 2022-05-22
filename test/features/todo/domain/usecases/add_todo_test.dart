@@ -3,17 +3,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
-import 'package:todo_clean/features/todo/domain/usecases/add_todo.dart';
+import 'package:todo_clean/features/todo/domain/usecases/add_todo_usecase.dart';
 
 import 'get_todos_test.mocks.dart';
 
 void main() {
-  late final AddTodo usecase;
+  late final AddTodoUsecase usecase;
   late final MockITodoRepository repository;
 
   setUp(() {
     repository = MockITodoRepository();
-    usecase = AddTodo(repository);
+    usecase = AddTodoUsecase(repository);
   });
 
   const todo = Todo(id: 0, title: "Test", completed: false);

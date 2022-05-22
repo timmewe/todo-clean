@@ -6,18 +6,18 @@ import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/core/usecases/use_case_interface.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
-import 'package:todo_clean/features/todo/domain/usecases/get_todos.dart';
+import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart';
 
 import 'get_todos_test.mocks.dart';
 
 @GenerateMocks([ITodoRepository])
 void main() {
-  late final GetTodos usecase;
+  late final GetTodosUsecase usecase;
   late final MockITodoRepository repository;
 
   setUp(() {
     repository = MockITodoRepository();
-    usecase = GetTodos(repository);
+    usecase = GetTodosUsecase(repository);
   });
 
   const todos = [Todo(id: 0, title: "Test", completed: false)];
