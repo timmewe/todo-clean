@@ -12,7 +12,6 @@ import 'package:todo_clean/features/todo/data/repositories/todo_repository.dart'
 import 'package:todo_clean/features/todo/data/tables/todo_table.dart';
 import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
 import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart';
-import 'package:todo_clean/features/todo/presentation/bloc/todos_bloc.dart';
 
 final GetIt serviceLocator = GetIt.instance;
 
@@ -37,8 +36,7 @@ void _initFeatures() {
         networkInfo: serviceLocator(),
       ),
     )
-    ..registerLazySingleton<GetTodosUsecase>(() => GetTodosUsecase(serviceLocator()))
-    ..registerFactory<TodosBloc>(() => TodosBloc(getTodos: serviceLocator()));
+    ..registerLazySingleton<GetTodosUsecase>(() => GetTodosUsecase(serviceLocator()));
 }
 
 void _initCore() {

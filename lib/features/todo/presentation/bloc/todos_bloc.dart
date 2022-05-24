@@ -16,6 +16,8 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
 
   TodosBloc({required this.getTodos}) : super(TodosInitial()) {
     on<GetTodos>(_onGetTodos);
+
+    add(GetTodos());
   }
 
   Future<void> _onGetTodos(GetTodos event, Emitter<TodosState> emit) async {
