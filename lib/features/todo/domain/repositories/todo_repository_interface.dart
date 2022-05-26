@@ -2,9 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 
+typedef EitherTodosOrFailure = Either<List<Todo>, Failure>;
+
 abstract class ITodoRepository {
-  Future<Either<List<Todo>, Failure>> getTodos();
-  Future<Either<Todo, Failure>> addTodo(Todo todo);
-  Future<Failure?> deleteTodo(int id);
-  Future<Either<Todo, Failure>> markCompleted(int id);
+  Future<EitherTodosOrFailure> getTodos();
+  Future<EitherTodosOrFailure> addTodo(Todo todo);
+  Future<EitherTodosOrFailure> deleteTodo(int id);
+  Future<EitherTodosOrFailure> markCompleted(int id);
 }

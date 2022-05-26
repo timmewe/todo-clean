@@ -58,8 +58,8 @@ void main() {
 
     test('should return todos when the response code is 200', () async {
       // arrange
-      final streamedResponse =
-          http.StreamedResponse(Stream.value(fixture("todos.json").codeUnits), 200);
+      final streamedResponse = http.StreamedResponse(
+          Stream.value(fixture("todos.json").codeUnits), 200);
       when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
 
       // act
@@ -69,7 +69,9 @@ void main() {
       expect(result, tTodoListModel);
     });
 
-    test('should throw a ServerException when the server response is a 404 or other', () async {
+    test(
+        'should throw a ServerException when the server response is a 404 or other',
+        () async {
       // arrange
       final streamedResponse = http.StreamedResponse(
         Stream.value("Something went wrong".codeUnits),

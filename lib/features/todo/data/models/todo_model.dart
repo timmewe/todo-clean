@@ -22,4 +22,12 @@ class TodoModel extends Todo {
       'completed': completed,
     };
   }
+
+  factory TodoModel.fromTodoEntity(Todo todo) {
+    return TodoModel(
+      id: todo.id,
+      title: todo.title,
+      completed: todo.completed,
+    );
+  }
 }

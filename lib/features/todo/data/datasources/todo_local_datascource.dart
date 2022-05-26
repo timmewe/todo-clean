@@ -4,4 +4,6 @@ abstract class ITodoLocalDatasource {
   Future<List<Todo>> getTodos();
 
   Future<void> saveTodos(List<Todo> todos);
+
+  Future<void> addTodo(Todo todo);
 }

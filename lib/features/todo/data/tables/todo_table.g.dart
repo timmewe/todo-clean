@@ -41,5 +41,7 @@ class TodoTableAdapter extends TypeAdapter<TodoTable> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TodoTableAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is TodoTableAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

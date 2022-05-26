@@ -14,9 +14,11 @@ class ChopperTodoRemoteDatasource implements ITodoRemoteDatasource {
   Future<List<TodoModel>> getTodos() async {
     final response = await api.getTodos();
     if (response.statusCode == 200) {
-      final todoJsonList = jsonDecode(response.body.toString()) as List<dynamic>;
-      final todoList =
-          todoJsonList.map((json) => TodoModel.fromJson(json as Map<String, dynamic>)).toList();
+      final todoJsonList =
+          jsonDecode(response.body.toString()) as List<dynamic>;
+      final todoList = todoJsonList
+          .map((json) => TodoModel.fromJson(json as Map<String, dynamic>))
+          .toList();
       return todoList;
     } else {
       throw ServerException();

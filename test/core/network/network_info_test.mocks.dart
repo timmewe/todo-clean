@@ -4,7 +4,8 @@
 
 import 'dart:async' as _i3;
 
-import 'package:internet_connection_checker/internet_connection_checker.dart' as _i2;
+import 'package:internet_connection_checker/internet_connection_checker.dart'
+    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -19,41 +20,45 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeDuration_0 extends _i1.Fake implements Duration {}
 
-class _FakeAddressCheckResult_1 extends _i1.Fake implements _i2.AddressCheckResult {}
+class _FakeAddressCheckResult_1 extends _i1.Fake
+    implements _i2.AddressCheckResult {}
 
 /// A class which mocks [InternetConnectionChecker].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockInternetConnectionChecker extends _i1.Mock implements _i2.InternetConnectionChecker {
+class MockInternetConnectionChecker extends _i1.Mock
+    implements _i2.InternetConnectionChecker {
   MockInternetConnectionChecker() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   List<_i2.AddressCheckOptions> get addresses =>
-      (super.noSuchMethod(Invocation.getter(#addresses), returnValue: <_i2.AddressCheckOptions>[])
+      (super.noSuchMethod(Invocation.getter(#addresses),
+              returnValue: <_i2.AddressCheckOptions>[])
           as List<_i2.AddressCheckOptions>);
   @override
-  set addresses(List<_i2.AddressCheckOptions>? _addresses) => super
-      .noSuchMethod(Invocation.setter(#addresses, _addresses), returnValueForMissingStub: null);
+  set addresses(List<_i2.AddressCheckOptions>? _addresses) =>
+      super.noSuchMethod(Invocation.setter(#addresses, _addresses),
+          returnValueForMissingStub: null);
   @override
   Duration get checkInterval =>
-      (super.noSuchMethod(Invocation.getter(#checkInterval), returnValue: _FakeDuration_0())
-          as Duration);
+      (super.noSuchMethod(Invocation.getter(#checkInterval),
+          returnValue: _FakeDuration_0()) as Duration);
   @override
   set checkInterval(Duration? _checkInterval) =>
       super.noSuchMethod(Invocation.setter(#checkInterval, _checkInterval),
           returnValueForMissingStub: null);
   @override
   _i3.Future<bool> get hasConnection =>
-      (super.noSuchMethod(Invocation.getter(#hasConnection), returnValue: Future<bool>.value(false))
-          as _i3.Future<bool>);
+      (super.noSuchMethod(Invocation.getter(#hasConnection),
+          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
   @override
-  _i3.Future<_i2.InternetConnectionStatus> get connectionStatus => (super.noSuchMethod(
-          Invocation.getter(#connectionStatus),
-          returnValue:
-              Future<_i2.InternetConnectionStatus>.value(_i2.InternetConnectionStatus.connected))
-      as _i3.Future<_i2.InternetConnectionStatus>);
+  _i3.Future<_i2.InternetConnectionStatus> get connectionStatus =>
+      (super.noSuchMethod(Invocation.getter(#connectionStatus),
+              returnValue: Future<_i2.InternetConnectionStatus>.value(
+                  _i2.InternetConnectionStatus.connected))
+          as _i3.Future<_i2.InternetConnectionStatus>);
   @override
   _i3.Stream<_i2.InternetConnectionStatus> get onStatusChange =>
       (super.noSuchMethod(Invocation.getter(#onStatusChange),
@@ -61,13 +66,17 @@ class MockInternetConnectionChecker extends _i1.Mock implements _i2.InternetConn
           as _i3.Stream<_i2.InternetConnectionStatus>);
   @override
   bool get hasListeners =>
-      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false) as bool);
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
   @override
   bool get isActivelyChecking =>
-      (super.noSuchMethod(Invocation.getter(#isActivelyChecking), returnValue: false) as bool);
+      (super.noSuchMethod(Invocation.getter(#isActivelyChecking),
+          returnValue: false) as bool);
   @override
-  _i3.Future<_i2.AddressCheckResult> isHostReachable(_i2.AddressCheckOptions? options) =>
+  _i3.Future<_i2.AddressCheckResult> isHostReachable(
+          _i2.AddressCheckOptions? options) =>
       (super.noSuchMethod(Invocation.method(#isHostReachable, [options]),
-              returnValue: Future<_i2.AddressCheckResult>.value(_FakeAddressCheckResult_1()))
+              returnValue: Future<_i2.AddressCheckResult>.value(
+                  _FakeAddressCheckResult_1()))
           as _i3.Future<_i2.AddressCheckResult>);
 }

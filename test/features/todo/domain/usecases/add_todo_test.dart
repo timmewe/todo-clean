@@ -20,13 +20,13 @@ void main() {
 
   test("should get todo from the repository", () async {
     // arrange
-    when(repository.addTodo(todo)).thenAnswer((_) async => const Left(todo));
+    when(repository.addTodo(todo)).thenAnswer((_) async => const Left([todo]));
 
     // act
     final result = await usecase(const Params(todo: todo));
 
     // assert
-    expect(result, const Left<Todo, Failure>(todo));
+    expect(result, const Left<List<Todo>, Failure>([todo]));
     verify(repository.addTodo(any));
     verifyNoMoreInteractions(repository);
   });

@@ -17,7 +17,8 @@ class HiveTodoLocalDatasource implements ITodoLocalDatasource {
       throw DatabaseException();
     } else {
       final todoModels = todoTables.map((table) {
-        return TodoModel(id: table.id, title: table.title, completed: table.completed);
+        return TodoModel(
+            id: table.id, title: table.title, completed: table.completed);
       }).toList();
       return Future.value(todoModels);
     }
@@ -33,5 +34,15 @@ class HiveTodoLocalDatasource implements ITodoLocalDatasource {
       );
     }).toList();
     await box.addAll(todoTables);
+  }
+
+  @override
+  Future<void> addTodo(Todo todo) async {
+    final todoTable = TodoTable(
+      id: todo.id,
+      title: todo.title,
+      completed: todo.completed,
+    );
+    await box.add(todoTable);
   }
 }
