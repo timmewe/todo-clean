@@ -32,8 +32,9 @@ void main() {
 
     test('should get data from the concrete usecase', () async {
       // arrange
-      when(mockGetTodosUsecase(NoParams()))
-          .thenAnswer((_) async => Left(tTodosList));
+      when(mockGetTodosUsecase.call(NoParams())).thenAnswer(
+        (_) async => Left(tTodosList),
+      );
 
       // act
       bloc.add(GetTodos());
@@ -43,12 +44,9 @@ void main() {
       verify(mockGetTodosUsecase(NoParams()));
     });
 
-    test(
-        'should emit [TodosLoading, TodosLoaded] when data is gotten successfully',
-        () async {
+    test('should emit [TodosLoading, TodosLoaded] when data is gotten successfully', () async {
       // arrange
-      when(mockGetTodosUsecase(NoParams()))
-          .thenAnswer((_) async => Left(tTodosList));
+      when(mockGetTodosUsecase(NoParams())).thenAnswer((_) async => Left(tTodosList));
 
       // assert later
       final expected = [TodosLoading(), TodosLoaded(todos: tTodosList)];
@@ -58,35 +56,25 @@ void main() {
       bloc.add(GetTodos());
     });
 
-    test('should emit [TodosLoading, TodosLoadError] when getting data fails',
-        () async {
+    test('should emit [TodosLoading, TodosLoadError] when getting data fails', () async {
       // arrange
-      when(mockGetTodosUsecase(NoParams()))
-          .thenAnswer((_) async => Right(ServerFailure()));
+      when(mockGetTodosUsecase(NoParams())).thenAnswer((_) async => Right(ServerFailure()));
 
       // assert later
-      final expected = [
-        TodosLoading(),
-        const TodosLoadError(errorMessage: serverFailureMessage)
-      ];
+      final expected = [TodosLoading(), const TodosLoadError(errorMessage: serverFailureMessage)];
       unawaited(expectLater(bloc.stream, emitsInOrder(expected)));
 
       // act
       bloc.add(GetTodos());
     });
 
-    test(
-        'should emit [TodosLoading, TodosLoadError] with a proper message for the error when getting data fails',
+    test('should emit [TodosLoading, TodosLoadError] with a proper message for the error when getting data fails',
         () async {
       // arrange
-      when(mockGetTodosUsecase(NoParams()))
-          .thenAnswer((_) async => Right(DatabaseFailure()));
+      when(mockGetTodosUsecase(NoParams())).thenAnswer((_) async => Right(DatabaseFailure()));
 
       // assert later
-      final expected = [
-        TodosLoading(),
-        const TodosLoadError(errorMessage: serverFailureMessage)
-      ];
+      final expected = [TodosLoading(), const TodosLoadError(errorMessage: serverFailureMessage)];
       unawaited(expectLater(bloc.stream, emitsInOrder(expected)));
 
       // act
