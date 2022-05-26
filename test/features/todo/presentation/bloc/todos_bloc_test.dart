@@ -8,7 +8,7 @@ import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/core/usecases/use_case_interface.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart';
-import 'package:todo_clean/features/todo/presentation/bloc/todos_bloc.dart';
+import 'package:todo_clean/features/todo/presentation/pages/todos/bloc/todos_bloc.dart';
 
 import 'todos_bloc_test.mocks.dart';
 
@@ -68,7 +68,8 @@ void main() {
       bloc.add(GetTodos());
     });
 
-    test('should emit [TodosLoading, TodosLoadError] with a proper message for the error when getting data fails',
+    test(
+        'should emit [TodosLoading, TodosLoadError] with a proper message for the error when getting data fails',
         () async {
       // arrange
       when(mockGetTodosUsecase(NoParams())).thenAnswer((_) async => Right(DatabaseFailure()));

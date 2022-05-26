@@ -25,8 +25,7 @@ void main() {
     final tTodoModelList = [tTodoModel];
     final tTodoTableList = [tTodoTable];
 
-    test('should return List of Todo from hive when todos are stored',
-        () async {
+    test('should return List of Todo from hive when todos are stored', () async {
       // arrange
       when(mockBox.values).thenAnswer((_) => tTodoTableList);
 
@@ -38,8 +37,7 @@ void main() {
       expect(result, tTodoModelList);
     });
 
-    test('should throw a LocalDatabaseException when no todos are stored',
-        () async {
+    test('should throw a LocalDatabaseException when no todos are stored', () async {
       // arrange
       when(mockBox.values).thenReturn([]);
 
@@ -52,9 +50,7 @@ void main() {
   });
 
   group('saveTodos', () {
-    final tTodoModelList = [
-      const TodoModel(id: 0, title: 'Test', completed: false)
-    ];
+    final tTodoModelList = [const TodoModel(id: 0, title: 'Test', completed: false)];
 
     test('should call Hive to save data', () async {
       // arrange
@@ -64,9 +60,7 @@ void main() {
       await todoLocalDatasource.saveTodos(tTodoModelList);
 
       // assert
-      final expectedTodoTableList = [
-        const TodoTable(id: 0, title: 'Test', completed: false)
-      ];
+      final expectedTodoTableList = [const TodoTable(id: 0, title: 'Test', completed: false)];
       verify(mockBox.addAll(expectedTodoTableList));
     });
   });
@@ -83,9 +77,7 @@ void main() {
       await todoLocalDatasource.addTodo(tTodoModel);
 
       // assert
-      const expectedTodoTableList =
-          TodoTable(id: 0, title: 'Test', completed: false);
-      verify(mockBox.add(expectedTodoTableList));
+      verify(mockBox.add(tTodoTable));
     });
   });
 }

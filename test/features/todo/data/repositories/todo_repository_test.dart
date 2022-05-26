@@ -52,12 +52,9 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
 
-      test(
-          'should return remote data when the call to remote datasource is successful',
-          () async {
+      test('should return remote data when the call to remote datasource is successful', () async {
         // arrange
-        when(mockRemoteDatasource.getTodos())
-            .thenAnswer((_) async => tTodoList);
+        when(mockRemoteDatasource.getTodos()).thenAnswer((_) async => tTodoList);
 
         // act
         final result = await repository.getTodos();
@@ -67,12 +64,10 @@ void main() {
         expect(result, const Left<List<Todo>, Failure>(tTodoList));
       });
 
-      test(
-          'should save the data locally when the call to remote datasource is successful',
+      test('should save the data locally when the call to remote datasource is successful',
           () async {
         // arrange
-        when(mockRemoteDatasource.getTodos())
-            .thenAnswer((_) async => tTodoList);
+        when(mockRemoteDatasource.getTodos()).thenAnswer((_) async => tTodoList);
 
         // act
         await repository.getTodos();
@@ -82,8 +77,7 @@ void main() {
         verify(mockLocalDatasource.saveTodos(tTodoList));
       });
 
-      test(
-          'should return server failure when the call to remote data source is unsuccessful',
+      test('should return server failure when the call to remote data source is unsuccessful',
           () async {
         // arrange
         when(mockRemoteDatasource.getTodos()).thenThrow(ServerException());
@@ -103,8 +97,7 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
 
-      test('should return last locally saved data when data is present',
-          () async {
+      test('should return last locally saved data when data is present', () async {
         // arrange
         when(mockLocalDatasource.getTodos()).thenAnswer((_) async => tTodoList);
 
@@ -139,8 +132,10 @@ void main() {
     test('should check if the device online', () async {
       // arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(mockRemoteDatasource.addTodo(any))
-          .thenAnswer((_) async => tTodoModel);
+      when(mockRemoteDatasource.addTodo(any)).thenAnswer(
+        (_) async => tTodoModel,
+      );
+      when(mockLocalDatasource.getTodos()).thenAnswer((_) async => tTodoList);
 
       // act
       await repository.addTodo(tTodoModel);
@@ -154,12 +149,10 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
 
-      test(
-          'should save the data locally when the call to remote datasource is successful',
+      test('should save the data locally when the call to remote datasource is successful',
           () async {
         // arrange
-        when(mockRemoteDatasource.addTodo(any))
-            .thenAnswer((_) async => tTodoModel);
+        when(mockRemoteDatasource.addTodo(any)).thenAnswer((_) async => tTodoModel);
         when(mockLocalDatasource.getTodos()).thenAnswer((_) async => tTodoList);
 
         // act
@@ -174,8 +167,7 @@ void main() {
           'should return remote data + local data when the call to remote datasource is successful',
           () async {
         // arrange
-        when(mockRemoteDatasource.addTodo(any))
-            .thenAnswer((_) async => tTodoModel);
+        when(mockRemoteDatasource.addTodo(any)).thenAnswer((_) async => tTodoModel);
         when(mockLocalDatasource.getTodos()).thenAnswer((_) async => tTodoList);
 
         // act

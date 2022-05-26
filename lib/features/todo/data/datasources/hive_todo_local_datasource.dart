@@ -18,7 +18,10 @@ class HiveTodoLocalDatasource implements ITodoLocalDatasource {
     } else {
       final todoModels = todoTables.map((table) {
         return TodoModel(
-            id: table.id, title: table.title, completed: table.completed);
+          id: table.id,
+          title: table.title,
+          completed: table.completed,
+        );
       }).toList();
       return Future.value(todoModels);
     }

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
-import 'package:todo_clean/features/todo/presentation/bloc/todos_bloc.dart';
+import 'package:todo_clean/features/todo/presentation/pages/todos/bloc/todos_bloc.dart';
 
 abstract class Failure extends Equatable {
   @override

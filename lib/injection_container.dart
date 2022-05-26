@@ -36,13 +36,11 @@ void _initFeatures() {
         networkInfo: serviceLocator(),
       ),
     )
-    ..registerLazySingleton<GetTodosUsecase>(
-        () => GetTodosUsecase(serviceLocator()));
+    ..registerLazySingleton<GetTodosUsecase>(() => GetTodosUsecase(serviceLocator()));
 }
 
 void _initCore() {
-  serviceLocator
-      .registerLazySingleton<INetworkInfo>(() => NetworkInfo(serviceLocator()));
+  serviceLocator.registerLazySingleton<INetworkInfo>(() => NetworkInfo(serviceLocator()));
   _initChopper();
 }
 
@@ -62,5 +60,6 @@ Future<void> _initExternal() async {
   serviceLocator
     ..registerLazySingleton<Box<TodoTable>>(() => todoBox)
     ..registerLazySingleton<InternetConnectionChecker>(
-        () => InternetConnectionChecker());
+      () => InternetConnectionChecker(),
+    );
 }

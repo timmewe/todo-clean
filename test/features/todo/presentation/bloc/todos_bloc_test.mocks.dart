@@ -9,10 +9,8 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:todo_clean/core/error/failures.dart' as _i7;
 import 'package:todo_clean/core/usecases/use_case_interface.dart' as _i8;
 import 'package:todo_clean/features/todo/domain/entities/todo.dart' as _i6;
-import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart'
-    as _i2;
-import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart'
-    as _i4;
+import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart' as _i2;
+import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -38,13 +36,12 @@ class MockGetTodosUsecase extends _i1.Mock implements _i4.GetTodosUsecase {
 
   @override
   _i2.ITodoRepository get repository =>
-      (super.noSuchMethod(Invocation.getter(#repository),
-          returnValue: _FakeITodoRepository_0()) as _i2.ITodoRepository);
+      (super.noSuchMethod(Invocation.getter(#repository), returnValue: _FakeITodoRepository_0())
+          as _i2.ITodoRepository);
   @override
-  _i5.Future<_i3.Either<List<_i6.Todo>, _i7.Failure>> call(
-          _i8.NoParams? params) =>
+  _i5.Future<_i3.Either<List<_i6.Todo>, _i7.Failure>> call(_i8.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i3.Either<List<_i6.Todo>, _i7.Failure>>.value(
-              _FakeEither_1<List<_i6.Todo>, _i7.Failure>())) as _i5
-          .Future<_i3.Either<List<_i6.Todo>, _i7.Failure>>);
+              returnValue: Future<_i3.Either<List<_i6.Todo>, _i7.Failure>>.value(
+                  _FakeEither_1<List<_i6.Todo>, _i7.Failure>()))
+          as _i5.Future<_i3.Either<List<_i6.Todo>, _i7.Failure>>);
 }

@@ -25,6 +25,13 @@ void main() {
         baseUrl: 'https://jsonplaceholder.typicode.com/',
       );
 
+  http.StreamedResponse getErrorResponse() {
+    return http.StreamedResponse(
+      Stream.value("Something went wrong".codeUnits),
+      404,
+    );
+  }
+
   setUp(() {
     mockHttpClient = MockClient();
     chopperClient = mockChopperClient(mockHttpClient);
@@ -33,21 +40,6 @@ void main() {
   });
 
   group('getTodos()', () {
-    // test('should perform a GET request on a URL with todos being the endpoint', () async {
-    //   // arrange
-    //   final streamedResponse = http.StreamedResponse(Stream.value(fixture("todos.json").codeUnits), 200);
-    //   final request = http.Request('GET', Uri.parse('https://jsonplaceholder.typicode.com/todos'));
-    //   // final request = Request('GET', 'todos', chopperClient.baseUrl);
-    //   // final baseRequest = await request.toBaseRequest();
-    //   when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
-    //
-    //   // act
-    //   await datasource.getTodos();
-    //
-    //   // assert
-    //   verify(mockHttpClient.send(argThat(contains('GET'))));
-    // });
-
     final tTodoListModel = [
       TodoModel.fromJson(
         jsonDecode(
@@ -58,8 +50,8 @@ void main() {
 
     test('should return todos when the response code is 200', () async {
       // arrange
-      final streamedResponse = http.StreamedResponse(
-          Stream.value(fixture("todos.json").codeUnits), 200);
+      final streamedResponse =
+          http.StreamedResponse(Stream.value(fixture("todos.json").codeUnits), 200);
       when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
 
       // act
@@ -69,14 +61,9 @@ void main() {
       expect(result, tTodoListModel);
     });
 
-    test(
-        'should throw a ServerException when the server response is a 404 or other',
-        () async {
+    test('should throw a ServerException when the server response is a 404 or other', () async {
       // arrange
-      final streamedResponse = http.StreamedResponse(
-        Stream.value("Something went wrong".codeUnits),
-        404,
-      );
+      final streamedResponse = getErrorResponse();
       when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
 
       // act
@@ -84,6 +71,41 @@ void main() {
 
       // assert
       expect(() => call(), throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('addTodo()', () {
+    final tTodoModel = TodoModel.fromJson(
+      jsonDecode(
+        fixture('todo.json'),
+      ) as Map<String, dynamic>,
+    );
+
+    test('should return todo when the response code is 200', () async {
+      // arrange
+      final streamedResponse = http.StreamedResponse(
+        Stream.value(fixture("todo.json").codeUnits),
+        200,
+      );
+      when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
+
+      // act
+      final result = await datasource.addTodo(tTodoModel);
+
+      // assert
+      expect(result, tTodoModel);
+    });
+
+    test('should throw a ServerException when the server response is a 404 or other', () async {
+      // arrange
+      final streamedResponse = getErrorResponse();
+      when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
+
+      // act
+      final call = datasource.addTodo;
+
+      // assert
+      expect(() => call(tTodoModel), throwsA(isA<ServerException>()));
     });
   });
 }

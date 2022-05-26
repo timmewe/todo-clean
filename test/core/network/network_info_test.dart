@@ -17,12 +17,10 @@ void main() {
   });
 
   group('isConnected', () {
-    test('should forward the call to InternetConnectionChecker.hasConnection',
-        () async {
+    test('should forward the call to InternetConnectionChecker.hasConnection', () async {
       // arrange
       final tHasConnectionFuture = Future.value(true);
-      when(mockInternetConnectionChecker.hasConnection)
-          .thenAnswer((_) => tHasConnectionFuture);
+      when(mockInternetConnectionChecker.hasConnection).thenAnswer((_) => tHasConnectionFuture);
 
       // act
       final result = networkInfo.isConnected;
