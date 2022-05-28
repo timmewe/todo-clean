@@ -58,8 +58,8 @@ class MockITodoLocalDatasource extends _i1.Mock implements _i5.ITodoLocalDatasou
   }
 
   @override
-  _i4.Future<List<_i6.Todo>> getTodos() => (super.noSuchMethod(Invocation.method(#getTodos, []),
-      returnValue: Future<List<_i6.Todo>>.value(<_i6.Todo>[])) as _i4.Future<List<_i6.Todo>>);
+  _i4.Stream<List<_i6.Todo>> getTodos() => (super.noSuchMethod(Invocation.method(#getTodos, []),
+      returnValue: Stream<List<_i6.Todo>>.empty()) as _i4.Stream<List<_i6.Todo>>);
   @override
   _i4.Future<void> saveTodos(List<_i6.Todo>? todos) =>
       (super.noSuchMethod(Invocation.method(#saveTodos, [todos]),

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:todo_clean/features/todo/data/models/todo_model.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 
 part 'todo_table.g.dart';
@@ -22,4 +23,8 @@ class TodoTable extends Todo {
     required this.title,
     required this.completed,
   }) : super(id: id, title: title, completed: completed);
+
+  TodoModel toModel() {
+    return TodoModel(id: id, title: title, completed: completed);
+  }
 }

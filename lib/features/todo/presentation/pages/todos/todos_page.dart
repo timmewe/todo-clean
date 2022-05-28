@@ -19,16 +19,18 @@ class TodosPage extends StatelessWidget {
 
   BlocProvider<TodosBloc> buildBody() {
     return BlocProvider<TodosBloc>(
-      create: (_) => TodosBloc(getTodos: serviceLocator())..add(GetTodos()),
+      create: (_) => TodosBloc(getTodos: serviceLocator(), refreshTodos: serviceLocator())
+        ..add(TodosSubscriptionRequested())
+        ..add(RefreshTodos()),
       child: BlocBuilder<TodosBloc, TodosState>(
         builder: (context, state) {
-          if (state is TodosInitial) {
+          if (state.status == TodosStatus.initial) {
             return const MessageDisplay(message: 'No todos here yet...');
-          } else if (state is TodosLoadError) {
-            return MessageDisplay(message: state.errorMessage);
-          } else if (state is TodosLoading) {
+          } else if (state.status == TodosStatus.failure) {
+            return MessageDisplay(message: state.message ?? 'Error');
+          } else if (state.status == TodosStatus.loading) {
             return const LoadingDisplay();
-          } else if (state is TodosLoaded) {
+          } else if (state.status == TodosStatus.success) {
             return TodosDisplay(todos: state.todos);
           } else {
             return const MessageDisplay(message: 'No todos here yet...');

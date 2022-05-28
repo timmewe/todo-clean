@@ -2,34 +2,31 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_clean/core/usecases/use_case_interface.dart';
-import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
-import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart';
+import 'package:todo_clean/features/todo/domain/usecases/refresh_todos_usecase.dart';
 
 import 'get_todos_test.mocks.dart';
 
 @GenerateMocks([ITodoRepository])
 void main() {
-  late final GetTodosUsecase usecase;
+  late final RefreshTodosUsecase usecase;
   late final MockITodoRepository repository;
 
   setUp(() {
     repository = MockITodoRepository();
-    usecase = GetTodosUsecase(repository);
+    usecase = RefreshTodosUsecase(repository);
   });
 
-  const todos = [Todo(id: 0, title: "Test", completed: false)];
-
-  test("should get todos from the repository", () async {
+  test("should return null from the repository", () async {
     // arrange
-    when(repository.getTodos()).thenAnswer((_) => Stream.value(todos));
+    when(repository.refreshTodos()).thenAnswer((_) async => null);
 
     // act
-    final result = usecase(NoParams());
+    final result = await usecase(NoParams());
 
     // assert
-    expect(result, emitsInOrder([todos]));
-    verify(repository.getTodos());
+    verify(repository.refreshTodos());
     verifyNoMoreInteractions(repository);
+    expect(result, isNull);
   });
 }

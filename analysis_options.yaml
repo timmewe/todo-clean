@@ -42,3 +42,4 @@ linter:
     one_member_abstracts: false
     overridden_fields: false
     unnecessary_lambdas: false
+    avoid_types_on_closure_parameters: false

@@ -20,28 +20,28 @@ class TodoRepository implements ITodoRepository {
   });
 
   @override
-  Future<Either<List<Todo>, Failure>> getTodos() async {
-    final isConnected = await networkInfo.isConnected;
-    if (!isConnected) {
-      try {
-        final localTodos = await localDatasource.getTodos();
-        return Left(localTodos);
-      } on DatabaseException {
-        return Right(DatabaseFailure());
-      }
-    }
+  Stream<List<Todo>> getTodos() {
+    return localDatasource.getTodos();
+  }
 
-    try {
-      final remoteTodos = await remoteDatasource.getTodos();
-      await localDatasource.saveTodos(remoteTodos);
-      return Left(remoteTodos);
-    } on ServerException {
-      return Right(ServerFailure());
+  @override
+  Future<Failure?> refreshTodos() async {
+    final isConnected = await networkInfo.isConnected;
+    if (isConnected) {
+      try {
+        final remoteTodos = await remoteDatasource.getTodos();
+        await localDatasource.saveTodos(remoteTodos);
+        return null;
+      } on ServerException {
+        return ServerFailure();
+      }
+    } else {
+      return NoInternetConnectionFailure();
     }
   }
 
   @override
-  Future<Either<List<Todo>, Failure>> addTodo(Todo todo) async {
+  Future<Failure?> addTodo(Todo todo) async {
     final isConnected = await networkInfo.isConnected;
     if (isConnected) {
       try {
@@ -49,18 +49,12 @@ class TodoRepository implements ITodoRepository {
           TodoModel.fromTodoEntity(todo),
         );
         await localDatasource.addTodo(remoteTodo);
-        final todos = await localDatasource.getTodos();
-        return Left(todos);
+        return null;
       } on ServerException {
-        return Right(ServerFailure());
+        return ServerFailure();
       }
     } else {
-      try {
-        final savedTodos = await localDatasource.getTodos();
-        return Right(AddTodoFailure(savedTodos));
-      } on DatabaseException {
-        return Right(DatabaseFailure());
-      }
+      return NoInternetConnectionFailure();
     }
   }
 

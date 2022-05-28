@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/domain/usecases/add_todo_usecase.dart';
 
@@ -18,16 +16,16 @@ void main() {
 
   const todo = Todo(id: 0, title: "Test", completed: false);
 
-  test("should get todo from the repository", () async {
+  test("should get null when todo could be added", () async {
     // arrange
-    when(repository.addTodo(todo)).thenAnswer((_) async => const Left([todo]));
+    when(repository.addTodo(todo)).thenAnswer((_) async => null);
 
     // act
     final result = await usecase(const Params(todo: todo));
 
     // assert
-    expect(result, const Left<List<Todo>, Failure>([todo]));
     verify(repository.addTodo(any));
     verifyNoMoreInteractions(repository);
+    expect(result, isNull);
   });
 }

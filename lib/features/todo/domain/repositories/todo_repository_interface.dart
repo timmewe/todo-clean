@@ -5,8 +5,9 @@ import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 typedef EitherTodosOrFailure = Either<List<Todo>, Failure>;
 
 abstract class ITodoRepository {
-  Future<EitherTodosOrFailure> getTodos();
-  Future<EitherTodosOrFailure> addTodo(Todo todo);
+  Stream<List<Todo>> getTodos();
+  Future<Failure?> refreshTodos();
+  Future<Failure?> addTodo(Todo todo);
   Future<EitherTodosOrFailure> deleteTodo(int id);
   Future<EitherTodosOrFailure> markCompleted(int id);
 }

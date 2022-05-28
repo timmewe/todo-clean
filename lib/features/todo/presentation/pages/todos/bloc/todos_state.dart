@@ -1,30 +1,30 @@
 part of 'todos_bloc.dart';
 
-abstract class TodosState extends Equatable {
-  const TodosState();
+enum TodosStatus { initial, loading, success, failure }
 
-  @override
-  List<Object> get props => [];
-}
-
-class TodosInitial extends TodosState {}
-
-class TodosLoading extends TodosState {}
-
-class TodosLoaded extends TodosState {
+class TodosState extends Equatable {
+  final TodosStatus status;
   final List<Todo> todos;
+  final String? message;
 
-  const TodosLoaded({required this.todos});
+  const TodosState({
+    this.status = TodosStatus.initial,
+    this.todos = const [],
+    this.message,
+  });
+
+  TodosState copyWith({
+    TodosStatus? status,
+    List<Todo>? todos,
+    String? message,
+  }) {
+    return TodosState(
+      status: status ?? this.status,
+      todos: todos ?? this.todos,
+      message: message,
+    );
+  }
 
   @override
-  List<Object> get props => [todos];
-}
-
-class TodosLoadError extends TodosState {
-  final String errorMessage;
-
-  const TodosLoadError({required this.errorMessage});
-
-  @override
-  List<Object> get props => [errorMessage];
+  List<Object?> get props => [status, todos, message];
 }
