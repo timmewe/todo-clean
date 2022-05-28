@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
-import 'package:todo_clean/features/todo/presentation/widgets/todo_item_widget.dart';
+import 'package:todo_clean/features/todo/presentation/pages/todos/widgets/todo_item_widget.dart';
 
 class TodosDisplay extends StatelessWidget {
   final List<Todo> todos;

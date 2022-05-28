@@ -10,7 +10,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const TodosPage());
     case routes.todoEditPageRoute:
       final todo = settings.arguments as Todo?;
-      return MaterialPageRoute(builder: (_) => TodoEditPage(todo: todo));
+      return MaterialPageRoute(builder: (_) => TodoEditPage(todo: todo), fullscreenDialog: true);
     default:
       return MaterialPageRoute(builder: (_) => const TodosPage());
   }

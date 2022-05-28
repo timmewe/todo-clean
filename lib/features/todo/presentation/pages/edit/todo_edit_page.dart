@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/presentation/pages/edit/bloc/todo_edit_bloc.dart';
-
-import '../../widgets/loading_display.dart';
+import 'package:todo_clean/features/todo/presentation/widgets/loading_display.dart';
 
 class TodoEditPage extends StatefulWidget {
   final Todo? todo;
@@ -26,18 +25,34 @@ class _TodoEditPageState extends State<TodoEditPage> {
       child: BlocBuilder<TodoEditBloc, TodoEditState>(
         builder: (context, state) {
           if (state is TodoEditInitial) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const LoadingDisplay(),
-            );
+            return _buildInitial();
           } else {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const LoadingDisplay(),
-            );
+            if (state is TodoEditCreateNew) {
+              return _buildNewTodo();
+            } else {
+              return _buildEditTodo();
+            }
           }
         },
       ),
     );
   }
+
+  Scaffold _buildEditTodo() {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit todo'),
+      ),
+    );
+  }
+
+  Scaffold _buildNewTodo() {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('New todo'),
+      ),
+    );
+  }
+
+  Scaffold _buildInitial() => Scaffold(appBar: AppBar(), body: const LoadingDisplay());
 }

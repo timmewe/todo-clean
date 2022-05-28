@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_clean/core/constants/routes.dart' as routes;
 import 'package:todo_clean/features/todo/presentation/pages/todos/bloc/todos_bloc.dart';
-import 'package:todo_clean/features/todo/presentation/widgets/widgets.dart';
+import 'package:todo_clean/features/todo/presentation/pages/todos/widgets/add_todo_button.dart';
+import 'package:todo_clean/features/todo/presentation/pages/todos/widgets/message_display.dart';
+import 'package:todo_clean/features/todo/presentation/pages/todos/widgets/todos_display.dart';
+import 'package:todo_clean/features/todo/presentation/widgets/loading_display.dart';
 import 'package:todo_clean/injection_container.dart';
 
 class TodosPage extends StatelessWidget {
@@ -15,10 +17,7 @@ class TodosPage extends StatelessWidget {
         title: const Text('Todos'),
       ),
       body: buildBody(),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => Navigator.of(context).pushNamed(routes.todoEditPageRoute),
-      ),
+      floatingActionButton: const AddTodoButton(),
     );
   }
 
