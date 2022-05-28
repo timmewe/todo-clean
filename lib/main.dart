@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_clean/features/todo/presentation/pages/todos/todos_page.dart';
+import 'package:todo_clean/core/constants/routes.dart' as routes;
 import 'package:todo_clean/injection_container.dart' as injectionContainer;
+import 'package:todo_clean/router.dart' as router;
 
 import 'core/utils/local_storage_helper.dart';
 
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: const TodosPage(),
+      onGenerateRoute: router.generateRoute,
+      initialRoute: routes.todosPageRoute,
     );
   }
 }

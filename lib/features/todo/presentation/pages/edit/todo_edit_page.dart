@@ -31,7 +31,10 @@ class _TodoEditPageState extends State<TodoEditPage> {
               body: const LoadingDisplay(),
             );
           } else {
-            return const LoadingDisplay();
+            return Scaffold(
+              appBar: AppBar(),
+              body: const LoadingDisplay(),
+            );
           }
         },
       ),
