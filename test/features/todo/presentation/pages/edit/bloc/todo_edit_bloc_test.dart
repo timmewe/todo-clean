@@ -33,7 +33,7 @@ void main() {
       // arrange
 
       // assert later
-      unawaited(expectLater(bloc.stream, emitsInOrder([const TodoEditExisting(todo: tTodo)])));
+      unawaited(expectLater(bloc.stream, emitsInOrder([TodoEditExisting(todo: tTodo)])));
 
       // act
       bloc.add(const TodoEditSetup(todo: tTodo));
