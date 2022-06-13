@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
+import 'package:todo_clean/features/todo/presentation/pages/edit/bloc/todo_edit_bloc.dart';
 
 class TodoEditDisplay extends StatefulWidget {
   final Todo? todo;
-  final void Function(Todo)? onSave;
   final bool loading;
 
   final TextEditingController textEditingController = TextEditingController();
 
   TodoEditDisplay({
     this.todo,
-    this.onSave,
     this.loading = false,
     Key? key,
   }) : super(key: key) {
@@ -63,7 +63,7 @@ class _TodoEditDisplayState extends State<TodoEditDisplay> {
                     title: widget.textEditingController.text,
                     completed: false,
                   );
-                  widget.onSave?.call(todo);
+                  context.read<TodoEditBloc>().add(TodoEditSave(todo: todo));
                 },
               ),
           ],

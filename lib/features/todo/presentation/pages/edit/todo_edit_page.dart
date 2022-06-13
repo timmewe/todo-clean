@@ -50,22 +50,15 @@ class TodoEditPage extends StatelessWidget {
 
   Widget _buildBody({required BuildContext context, required TodoEditState state}) {
     if (state is TodoEditCreateNew) {
-      return TodoEditDisplay(
-        onSave: (todo) {
-          context.read<TodoEditBloc>().add(TodoEditSave(todo: todo));
-        },
-      );
+      return TodoEditDisplay();
     } else if (state is TodoEditExisting) {
       return TodoEditDisplay(
         todo: state.todo,
-        onSave: (todo) {
-          context.read<TodoEditBloc>().add(TodoEditSave(todo: todo));
-        },
       );
     } else if (state is TodoEditLoading) {
       return TodoEditDisplay(todo: state.todo, loading: true);
     } else {
-      return TodoEditDisplay(onSave: (_) {});
+      return TodoEditDisplay();
     }
   }
 }
