@@ -12,3 +12,12 @@ class TodoEditSetup extends TodoEditEvent {
   @override
   List<Object> get props => todo != null ? [todo!] : [];
 }
+
+class TodoEditSave extends TodoEditEvent {
+  final Todo todo;
+
+  const TodoEditSave({required this.todo});
+
+  @override
+  List<Object> get props => [todo];
+}

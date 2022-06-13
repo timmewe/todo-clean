@@ -25,3 +25,23 @@ class TodoEditExisting extends TodoEditState {
   @override
   List<Object> get props => [todo];
 }
+
+class TodoEditLoading extends TodoEditState {
+  final Todo todo;
+
+  TodoEditLoading({required this.todo});
+
+  @override
+  List<Object> get props => [todo];
+}
+
+class TodoEditSaveSuccess extends TodoEditState {}
+
+class TodoEditSaveFailure extends TodoEditState {
+  final String message;
+
+  TodoEditSaveFailure({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

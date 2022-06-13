@@ -22,12 +22,4 @@ class _$TodoApi extends TodoApi {
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
-
-  @override
-  Future<Response<dynamic>> createTodo(String data) {
-    final $url = 'todos';
-    final $body = data;
-    final $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<dynamic, dynamic>($request);
-  }
 }

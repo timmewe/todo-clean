@@ -11,7 +11,7 @@ class HiveTodoLocalDatasource implements ITodoLocalDatasource {
 
   @override
   Stream<List<Todo>> getTodos() {
-    return box.watch().map((_) => box.values.toList()).startWith([]);
+    return box.watch().map((_) => box.values.toList()).startWith(box.values.toList());
   }
 
   @override
@@ -23,16 +23,21 @@ class HiveTodoLocalDatasource implements ITodoLocalDatasource {
         completed: todo.completed,
       );
     }).toList();
-    await box.addAll(todoTables);
+    await box.putAll(Map.fromEntries(todoTables.map((t) => MapEntry(t.id, t))));
   }
 
   @override
-  Future<void> addTodo(Todo todo) async {
+  Future<void> saveTodo(Todo todo) async {
     final todoTable = TodoTable(
       id: todo.id,
       title: todo.title,
       completed: todo.completed,
     );
-    await box.add(todoTable);
+    if (todoTable.id == -1) {
+      final id = await box.add(todoTable);
+      await box.put(id, TodoTable(id: id, title: todo.title, completed: todo.completed));
+    } else {
+      await box.put(todo.id, todoTable);
+    }
   }
 }

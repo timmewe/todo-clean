@@ -119,68 +119,79 @@ void main() {
     const tTodoModel = TodoModel(id: 0, title: "Test", completed: false);
     const tTodoList = [tTodoModel];
 
-    test('should check if the device online', () async {
+    test('should save the data locally', () async {
       // arrange
-      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(mockRemoteDatasource.addTodo(any)).thenAnswer(
-        (_) async => tTodoModel,
-      );
-      when(mockLocalDatasource.getTodos()).thenAnswer((_) => Stream.value(tTodoList));
+      when(mockLocalDatasource.saveTodo(any)).thenAnswer((_) async => tTodoModel);
 
       // act
-      await repository.addTodo(tTodoModel);
+      await repository.saveTodo(tTodoModel);
 
       // assert
-      verify(mockNetworkInfo.isConnected);
+      verify(mockLocalDatasource.saveTodo(tTodoModel));
     });
 
-    group('device is online', () {
-      setUp(() {
-        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      });
-
-      test('should save the data locally when the call to remote datasource is successful',
-          () async {
-        // arrange
-        when(mockRemoteDatasource.addTodo(any)).thenAnswer((_) async => tTodoModel);
-
-        // act
-        await repository.addTodo(tTodoModel);
-
-        // assert
-        verify(mockRemoteDatasource.addTodo(any));
-        verify(mockLocalDatasource.addTodo(any));
-      });
-
-      test('should return null when remote data could be saved', () async {
-        // arrange
-        when(mockRemoteDatasource.addTodo(any)).thenAnswer((_) async => tTodoModel);
-        when(mockLocalDatasource.getTodos()).thenAnswer((_) => Stream.value(tTodoList));
-
-        // act
-        final result = await repository.addTodo(tTodoModel);
-
-        // assert
-        verify(mockRemoteDatasource.addTodo(tTodoModel));
-        verify(mockLocalDatasource.addTodo(tTodoModel));
-        expect(result, isNull);
-      });
-    });
-
-    group('device is offline', () {
-      setUp(() {
-        when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
-      });
-
-      test('should return NoInternetConnectionFailure', () async {
-        // act
-        final result = await repository.addTodo(tTodoModel);
-
-        // assert
-        verifyZeroInteractions(mockRemoteDatasource);
-        verifyZeroInteractions(mockLocalDatasource);
-        expect(result, NoInternetConnectionFailure());
-      });
-    });
+    // test('should check if the device online', () async {
+    //   // arrange
+    //   when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    //   when(mockRemoteDatasource.saveTodo(any)).thenAnswer(
+    //     (_) async => tTodoModel,
+    //   );
+    //   when(mockLocalDatasource.getTodos()).thenAnswer((_) => Stream.value(tTodoList));
+    //
+    //   // act
+    //   await repository.saveTodo(tTodoModel);
+    //
+    //   // assert
+    //   verify(mockNetworkInfo.isConnected);
+    // });
+    //
+    // group('device is online', () {
+    //   setUp(() {
+    //     when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    //   });
+    //
+    //   test('should save the data locally when the call to remote datasource is successful',
+    //       () async {
+    //     // arrange
+    //     when(mockRemoteDatasource.saveTodo(any)).thenAnswer((_) async => tTodoModel);
+    //
+    //     // act
+    //     await repository.saveTodo(tTodoModel);
+    //
+    //     // assert
+    //     verify(mockRemoteDatasource.saveTodo(any));
+    //     verify(mockLocalDatasource.saveTodo(any));
+    //   });
+    //
+    //   test('should return null when remote data could be saved', () async {
+    //     // arrange
+    //     when(mockRemoteDatasource.saveTodo(any)).thenAnswer((_) async => tTodoModel);
+    //     when(mockLocalDatasource.getTodos()).thenAnswer((_) => Stream.value(tTodoList));
+    //
+    //     // act
+    //     final result = await repository.saveTodo(tTodoModel);
+    //
+    //     // assert
+    //     verify(mockRemoteDatasource.saveTodo(tTodoModel));
+    //     verify(mockLocalDatasource.saveTodo(tTodoModel));
+    //     expect(result, isNull);
+    //   });
+    // });
+    //
+    // group('device is offline', () {
+    //   setUp(() {
+    //     when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+    //   });
+    //
+    //   test('should return NoInternetConnectionFailure', () async {
+    //     // act
+    //     final result = await repository.saveTodo(tTodoModel);
+    //
+    //     // assert
+    //     verifyZeroInteractions(mockRemoteDatasource);
+    //     verifyZeroInteractions(mockLocalDatasource);
+    //     expect(result, NoInternetConnectionFailure());
+    //   });
+    // });
   });
 }

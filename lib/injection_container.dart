@@ -13,6 +13,7 @@ import 'package:todo_clean/features/todo/data/tables/todo_table.dart';
 import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
 import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart';
 import 'package:todo_clean/features/todo/domain/usecases/refresh_todos_usecase.dart';
+import 'package:todo_clean/features/todo/domain/usecases/save_todo_usecase.dart';
 
 final GetIt serviceLocator = GetIt.instance;
 
@@ -38,7 +39,8 @@ void _initFeatures() {
       ),
     )
     ..registerLazySingleton<GetTodosUsecase>(() => GetTodosUsecase(serviceLocator()))
-    ..registerLazySingleton<RefreshTodosUsecase>(() => RefreshTodosUsecase(serviceLocator()));
+    ..registerLazySingleton<RefreshTodosUsecase>(() => RefreshTodosUsecase(serviceLocator()))
+    ..registerLazySingleton<SaveTodoUsecase>(() => SaveTodoUsecase(serviceLocator()));
 }
 
 void _initCore() {
@@ -49,6 +51,9 @@ void _initCore() {
 void _initChopper() {
   final chopper = ChopperClient(
     baseUrl: 'https://jsonplaceholder.typicode.com',
+    interceptors: [
+      HttpLoggingInterceptor(),
+    ],
     services: [
       TodoApi.create(),
     ],

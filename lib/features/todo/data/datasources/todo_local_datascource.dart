@@ -5,5 +5,5 @@ abstract class ITodoLocalDatasource {
 
   Future<void> saveTodos(List<Todo> todos);
 
-  Future<void> addTodo(Todo todo);
+  Future<void> saveTodo(Todo todo);
 }

@@ -54,11 +54,6 @@ class MockTodoApi extends _i1.Mock implements _i4.TodoApi {
       (super.noSuchMethod(Invocation.method(#getTodos, []),
               returnValue: Future<_i2.Response<dynamic>>.value(_FakeResponse_2<dynamic>()))
           as _i5.Future<_i2.Response<dynamic>>);
-  @override
-  _i5.Future<_i2.Response<dynamic>> createTodo(String? data) =>
-      (super.noSuchMethod(Invocation.method(#createTodo, [data]),
-              returnValue: Future<_i2.Response<dynamic>>.value(_FakeResponse_2<dynamic>()))
-          as _i5.Future<_i2.Response<dynamic>>);
 }
 
 /// A class which mocks [Client].

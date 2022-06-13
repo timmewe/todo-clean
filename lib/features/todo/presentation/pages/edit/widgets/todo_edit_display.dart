@@ -3,10 +3,15 @@ import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 
 class TodoEditDisplay extends StatefulWidget {
   final Todo? todo;
+  final void Function(Todo)? onSave;
+  final bool loading;
+
   final TextEditingController textEditingController = TextEditingController();
 
   TodoEditDisplay({
     this.todo,
+    this.onSave,
+    this.loading = false,
     Key? key,
   }) : super(key: key) {
     textEditingController
@@ -47,10 +52,20 @@ class _TodoEditDisplayState extends State<TodoEditDisplay> {
               },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              child: const Text('Save'),
-              onPressed: () {},
-            ),
+            if (widget.loading)
+              const Center(child: CircularProgressIndicator())
+            else
+              ElevatedButton(
+                child: const Text('Save'),
+                onPressed: () {
+                  final todo = Todo(
+                    id: widget.todo?.id ?? -1,
+                    title: widget.textEditingController.text,
+                    completed: false,
+                  );
+                  widget.onSave?.call(todo);
+                },
+              ),
           ],
         ),
       ),

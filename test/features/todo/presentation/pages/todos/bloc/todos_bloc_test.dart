@@ -46,7 +46,7 @@ void main() {
       verify(mockGetTodosUsecase(NoParams()));
     });
 
-    test('should emit states with staus [.loading, .success] when data is gotten successfully',
+    test('should emit states with status [.loading, .success] when data is gotten successfully',
         () async {
       // arrange
       when(mockGetTodosUsecase(NoParams())).thenAnswer((_) => Stream.value(tTodosList));

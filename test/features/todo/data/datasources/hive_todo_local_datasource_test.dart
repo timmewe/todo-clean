@@ -18,65 +18,55 @@ void main() {
     todoLocalDatasource = HiveTodoLocalDatasource(box: mockBox);
   });
 
-  // group('getTodos', () {
-  //   const tTodoModel = TodoModel(id: 0, title: 'Test', completed: false);
-  //   const tTodoTable = TodoTable(id: 0, title: 'Test', completed: false);
-  //   final tTodoModelList = [tTodoModel];
-  //   final tTodoTableList = [tTodoTable];
-  //
-  //   test('should return Stream of a List of Todos from hive when todos are stored', () async {
-  //     // arrange
-  //     when(mockBox.values).thenAnswer((_) => tTodoTableList);
-  //
-  //     // act
-  //     final result = todoLocalDatasource.getTodos();
-  //
-  //     // assert
-  //     verify(mockBox.values);
-  //     expect(result, emitsInOrder([tTodoModelList]));
-  //   });
-  //
-  //   test('should throw a LocalDatabaseException when no todos are stored', () async {
-  //     // arrange
-  //     when(mockBox.values).thenReturn([]);
-  //
-  //     // act
-  //     final call = todoLocalDatasource.getTodos;
-  //
-  //     // assert
-  //     expect(call, throwsA(const TypeMatcher<DatabaseException>()));
-  //   });
-  // });
-
   group('saveTodos', () {
     final tTodoModelList = [const TodoModel(id: 0, title: 'Test', completed: false)];
 
     test('should call Hive to save data', () async {
       // arrange
-      when(mockBox.addAll(any)).thenAnswer((_) async => [0]);
+      when(mockBox.putAll(any)).thenAnswer((_) async => [0]);
 
       // act
       await todoLocalDatasource.saveTodos(tTodoModelList);
 
       // assert
-      final expectedTodoTableList = [const TodoTable(id: 0, title: 'Test', completed: false)];
-      verify(mockBox.addAll(expectedTodoTableList));
+      final expectedTodoTableMap = {0: const TodoTable(id: 0, title: 'Test', completed: false)};
+      verify(mockBox.putAll(expectedTodoTableMap));
     });
   });
 
-  group('addTodo', () {
-    const tTodoModel = TodoModel(id: 0, title: 'Test', completed: false);
-    const tTodoTable = TodoTable(id: 0, title: 'Test', completed: false);
+  group('saveTodo', () {
+    group('Update existing todo', () {
+      const tTodoModel = TodoModel(id: 0, title: 'Test', completed: false);
+      const tTodoTable = TodoTable(id: 0, title: 'Test', completed: false);
 
-    test('should call Hive to add todo', () async {
-      // arrange
-      when(mockBox.add(any)).thenAnswer((_) async => 0);
+      test('should call put to update todo', () async {
+        // arrange
+        when(mockBox.put(any, any)).thenAnswer((_) async => 0);
 
-      // act
-      await todoLocalDatasource.addTodo(tTodoModel);
+        // act
+        await todoLocalDatasource.saveTodo(tTodoModel);
 
-      // assert
-      verify(mockBox.add(tTodoTable));
+        // assert
+        verify(mockBox.put(tTodoTable.id, tTodoTable));
+      });
+    });
+
+    group('Create new todo', () {
+      const tTodoModel = TodoModel(id: -1, title: 'Test', completed: false);
+      const tTodoTable = TodoTable(id: -1, title: 'Test', completed: false);
+      const tTodoTableAfterUpdate = TodoTable(id: 0, title: 'Test', completed: false);
+
+      test('should call add to save todo and update todo with autoincremented key', () async {
+        // arrange
+        when(mockBox.add(any)).thenAnswer((_) async => 0);
+
+        // act
+        await todoLocalDatasource.saveTodo(tTodoModel);
+
+        // assert
+        verify(mockBox.add(tTodoTable));
+        verify(mockBox.put(0, tTodoTableAfterUpdate));
+      });
     });
   });
 }

@@ -17,33 +17,9 @@ class ChopperTodoRemoteDatasource implements ITodoRemoteDatasource {
       final todoJsonList = jsonDecode(response.body.toString()) as List<dynamic>;
       final todoList =
           todoJsonList.map((json) => TodoModel.fromJson(json as Map<String, dynamic>)).toList();
-      return todoList;
+      return todoList.take(5).toList();
     } else {
       throw ServerException();
     }
-  }
-
-  @override
-  Future<TodoModel> addTodo(TodoModel todo) async {
-    final response = await api.createTodo(todo.toJson().toString());
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body.toString()) as Map<String, dynamic>;
-      final createdTodo = TodoModel.fromJson(json);
-      return createdTodo;
-    } else {
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<bool> deleteTodo(int id) {
-    // TODO: implement deleteTodo
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<TodoModel> markCompleted(int id) {
-    // TODO: implement markCompleted
-    throw UnimplementedError();
   }
 }

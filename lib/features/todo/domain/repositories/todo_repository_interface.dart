@@ -7,7 +7,7 @@ typedef EitherTodosOrFailure = Either<List<Todo>, Failure>;
 abstract class ITodoRepository {
   Stream<List<Todo>> getTodos();
   Future<Failure?> refreshTodos();
-  Future<Failure?> addTodo(Todo todo);
+  Future<void> saveTodo(Todo todo);
   Future<EitherTodosOrFailure> deleteTodo(int id);
   Future<EitherTodosOrFailure> markCompleted(int id);
 }

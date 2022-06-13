@@ -38,9 +38,10 @@ class MockITodoRepository extends _i1.Mock implements _i3.ITodoRepository {
       (super.noSuchMethod(Invocation.method(#refreshTodos, []),
           returnValue: Future<_i6.Failure?>.value()) as _i4.Future<_i6.Failure?>);
   @override
-  _i4.Future<_i6.Failure?> addTodo(_i5.Todo? todo) =>
-      (super.noSuchMethod(Invocation.method(#addTodo, [todo]),
-          returnValue: Future<_i6.Failure?>.value()) as _i4.Future<_i6.Failure?>);
+  _i4.Future<void> saveTodo(_i5.Todo? todo) =>
+      (super.noSuchMethod(Invocation.method(#saveTodo, [todo]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Either<List<_i5.Todo>, _i6.Failure>> deleteTodo(int? id) =>
       (super.noSuchMethod(Invocation.method(#deleteTodo, [id]),

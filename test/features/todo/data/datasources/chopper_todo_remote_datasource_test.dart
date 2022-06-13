@@ -73,39 +73,4 @@ void main() {
       expect(() => call(), throwsA(isA<ServerException>()));
     });
   });
-
-  group('addTodo()', () {
-    final tTodoModel = TodoModel.fromJson(
-      jsonDecode(
-        fixture('todo.json'),
-      ) as Map<String, dynamic>,
-    );
-
-    test('should return todo when the response code is 200', () async {
-      // arrange
-      final streamedResponse = http.StreamedResponse(
-        Stream.value(fixture("todo.json").codeUnits),
-        200,
-      );
-      when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
-
-      // act
-      final result = await datasource.addTodo(tTodoModel);
-
-      // assert
-      expect(result, tTodoModel);
-    });
-
-    test('should throw a ServerException when the server response is a 404 or other', () async {
-      // arrange
-      final streamedResponse = getErrorResponse();
-      when(mockHttpClient.send(any)).thenAnswer((_) async => streamedResponse);
-
-      // act
-      final call = datasource.addTodo;
-
-      // assert
-      expect(() => call(tTodoModel), throwsA(isA<ServerException>()));
-    });
-  });
 }
