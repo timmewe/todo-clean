@@ -5,11 +5,13 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:todo_clean/core/network/network_info.dart' as _i7;
-import 'package:todo_clean/features/todo/data/datasources/todo_local_datascource.dart' as _i5;
-import 'package:todo_clean/features/todo/data/datasources/todo_remote_datasource.dart' as _i2;
-import 'package:todo_clean/features/todo/data/models/todo_model.dart' as _i4;
-import 'package:todo_clean/features/todo/domain/entities/todo.dart' as _i6;
+import 'package:todo_clean/core/network/network_info.dart' as _i8;
+import 'package:todo_clean/features/todo/data/local_datasources/todo_db.dart' as _i6;
+import 'package:todo_clean/features/todo/data/local_datasources/todo_local_datascource.dart' as _i5;
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_raw.dart' as _i4;
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_remote_datasource.dart'
+    as _i2;
+import 'package:todo_clean/features/todo/domain/entities/todo.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,10 +32,9 @@ class MockITodoRemoteDatasource extends _i1.Mock implements _i2.ITodoRemoteDatas
   }
 
   @override
-  _i3.Future<List<_i4.TodoModel>> getTodos() =>
-      (super.noSuchMethod(Invocation.method(#getTodos, []),
-              returnValue: Future<List<_i4.TodoModel>>.value(<_i4.TodoModel>[]))
-          as _i3.Future<List<_i4.TodoModel>>);
+  _i3.Future<List<_i4.TodoRaw>> getTodos() => (super.noSuchMethod(Invocation.method(#getTodos, []),
+          returnValue: Future<List<_i4.TodoRaw>>.value(<_i4.TodoRaw>[]))
+      as _i3.Future<List<_i4.TodoRaw>>);
 }
 
 /// A class which mocks [ITodoLocalDatasource].
@@ -45,15 +46,15 @@ class MockITodoLocalDatasource extends _i1.Mock implements _i5.ITodoLocalDatasou
   }
 
   @override
-  _i3.Stream<List<_i6.Todo>> getTodos() => (super.noSuchMethod(Invocation.method(#getTodos, []),
-      returnValue: Stream<List<_i6.Todo>>.empty()) as _i3.Stream<List<_i6.Todo>>);
+  _i3.Stream<List<_i6.TodoDb>> getTodos() => (super.noSuchMethod(Invocation.method(#getTodos, []),
+      returnValue: Stream<List<_i6.TodoDb>>.empty()) as _i3.Stream<List<_i6.TodoDb>>);
   @override
-  _i3.Future<void> saveTodos(List<_i6.Todo>? todos) =>
+  _i3.Future<void> saveTodos(List<_i7.Todo>? todos) =>
       (super.noSuchMethod(Invocation.method(#saveTodos, [todos]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
-  _i3.Future<void> saveTodo(_i6.Todo? todo) =>
+  _i3.Future<void> saveTodo(_i7.Todo? todo) =>
       (super.noSuchMethod(Invocation.method(#saveTodo, [todo]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
@@ -62,7 +63,7 @@ class MockITodoLocalDatasource extends _i1.Mock implements _i5.ITodoLocalDatasou
 /// A class which mocks [INetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockINetworkInfo extends _i1.Mock implements _i7.INetworkInfo {
+class MockINetworkInfo extends _i1.Mock implements _i8.INetworkInfo {
   MockINetworkInfo() {
     _i1.throwOnMissingStub(this);
   }

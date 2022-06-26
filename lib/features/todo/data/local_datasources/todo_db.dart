@@ -1,11 +1,10 @@
 import 'package:hive/hive.dart';
-import 'package:todo_clean/features/todo/data/models/todo_model.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 
-part 'todo_table.g.dart';
+part 'todo_db.g.dart';
 
 @HiveType(typeId: 0)
-class TodoTable extends Todo {
+class TodoDb extends Todo {
   @override
   @HiveField(0)
   final int id;
@@ -18,13 +17,13 @@ class TodoTable extends Todo {
   @HiveField(2)
   final bool completed;
 
-  const TodoTable({
+  const TodoDb({
     required this.id,
     required this.title,
     required this.completed,
   }) : super(id: id, title: title, completed: completed);
 
-  TodoModel toModel() {
-    return TodoModel(id: id, title: title, completed: completed);
+  Todo mapToEntity() {
+    return Todo(id: id, title: title, completed: completed);
   }
 }

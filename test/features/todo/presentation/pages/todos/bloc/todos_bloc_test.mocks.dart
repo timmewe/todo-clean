@@ -5,12 +5,11 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:todo_clean/core/error/failures.dart' as _i8;
+import 'package:todo_clean/core/error/failures.dart' as _i7;
 import 'package:todo_clean/core/usecases/use_case_interface.dart' as _i6;
 import 'package:todo_clean/features/todo/domain/entities/todo.dart' as _i5;
-import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart' as _i2;
-import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart' as _i3;
-import 'package:todo_clean/features/todo/domain/usecases/refresh_todos_usecase.dart' as _i7;
+import 'package:todo_clean/features/todo/domain/usecases/get_todos_usecase.dart' as _i2;
+import 'package:todo_clean/features/todo/domain/usecases/refresh_todos_usecase.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,20 +21,24 @@ import 'package:todo_clean/features/todo/domain/usecases/refresh_todos_usecase.d
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeITodoRepository_0 extends _i1.Fake implements _i2.ITodoRepository {}
+class _FakeIGetTodosUseCaseDatasource_0 extends _i1.Fake implements _i2.IGetTodosUseCaseDatasource {
+}
+
+class _FakeIRefreshTodosUseCaseDatasource_1 extends _i1.Fake
+    implements _i3.IRefreshTodosUseCaseDatasource {}
 
 /// A class which mocks [GetTodosUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTodosUsecase extends _i1.Mock implements _i3.GetTodosUsecase {
+class MockGetTodosUsecase extends _i1.Mock implements _i2.GetTodosUsecase {
   MockGetTodosUsecase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.ITodoRepository get datasource =>
-      (super.noSuchMethod(Invocation.getter(#repository), returnValue: _FakeITodoRepository_0())
-          as _i2.ITodoRepository);
+  _i2.IGetTodosUseCaseDatasource get datasource =>
+      (super.noSuchMethod(Invocation.getter(#datasource),
+          returnValue: _FakeIGetTodosUseCaseDatasource_0()) as _i2.IGetTodosUseCaseDatasource);
   @override
   _i4.Stream<List<_i5.Todo>> call(_i6.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
@@ -45,17 +48,17 @@ class MockGetTodosUsecase extends _i1.Mock implements _i3.GetTodosUsecase {
 /// A class which mocks [RefreshTodosUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRefreshTodosUsecase extends _i1.Mock implements _i7.RefreshTodosUsecase {
+class MockRefreshTodosUsecase extends _i1.Mock implements _i3.RefreshTodosUsecase {
   MockRefreshTodosUsecase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.ITodoRepository get datasource =>
-      (super.noSuchMethod(Invocation.getter(#repository), returnValue: _FakeITodoRepository_0())
-          as _i2.ITodoRepository);
+  _i3.IRefreshTodosUseCaseDatasource get datasource => (super.noSuchMethod(
+      Invocation.getter(#datasource),
+      returnValue: _FakeIRefreshTodosUseCaseDatasource_1()) as _i3.IRefreshTodosUseCaseDatasource);
   @override
-  _i4.Future<_i8.Failure?> call(_i6.NoParams? params) =>
+  _i4.Future<_i7.Failure?> call(_i6.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i8.Failure?>.value()) as _i4.Future<_i8.Failure?>);
+          returnValue: Future<_i7.Failure?>.value()) as _i4.Future<_i7.Failure?>);
 }

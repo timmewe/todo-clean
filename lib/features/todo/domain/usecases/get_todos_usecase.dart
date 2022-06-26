@@ -1,6 +1,10 @@
 import 'package:todo_clean/core/usecases/use_case_interface.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 
+abstract class IGetTodosUseCaseDatasource {
+  Stream<List<Todo>> getTodos();
+}
+
 class GetTodosUsecase implements IUseCase<Stream<List<Todo>>, NoParams> {
   final IGetTodosUseCaseDatasource datasource;
 
@@ -10,8 +14,4 @@ class GetTodosUsecase implements IUseCase<Stream<List<Todo>>, NoParams> {
   Stream<List<Todo>> call(NoParams params) {
     return datasource.getTodos();
   }
-}
-
-abstract class IGetTodosUseCaseDatasource {
-  Stream<List<Todo>> getTodos();
 }

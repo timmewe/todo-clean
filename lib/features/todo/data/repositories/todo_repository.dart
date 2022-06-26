@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:todo_clean/core/error/exceptions.dart';
 import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/core/network/network_info.dart';
-import 'package:todo_clean/features/todo/data/datasources/todo_local_datascource.dart';
-import 'package:todo_clean/features/todo/data/datasources/todo_remote_datasource.dart';
+import 'package:todo_clean/features/todo/data/local_datasources/todo_local_datascource.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_remote_datasource.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
 
@@ -20,7 +20,9 @@ class TodoRepository implements ITodoRepository {
 
   @override
   Stream<List<Todo>> getTodos() {
-    return localDatasource.getTodos();
+    return localDatasource.getTodos().map((todos) {
+      return todos.map((table) => table.mapToEntity()).toList();
+    });
   }
 
   @override

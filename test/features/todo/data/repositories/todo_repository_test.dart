@@ -4,9 +4,10 @@ import 'package:mockito/mockito.dart';
 import 'package:todo_clean/core/error/exceptions.dart';
 import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/core/network/network_info.dart';
-import 'package:todo_clean/features/todo/data/datasources/todo_local_datascource.dart';
-import 'package:todo_clean/features/todo/data/datasources/todo_remote_datasource.dart';
-import 'package:todo_clean/features/todo/data/models/todo_model.dart';
+import 'package:todo_clean/features/todo/data/local_datasources/todo_db.dart';
+import 'package:todo_clean/features/todo/data/local_datasources/todo_local_datascource.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_raw.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_remote_datasource.dart';
 import 'package:todo_clean/features/todo/data/repositories/todo_repository.dart';
 
 import 'todo_repository_test.mocks.dart';
@@ -30,8 +31,9 @@ void main() {
   });
 
   group('getTodos()', () {
-    const tTodoModel = TodoModel(id: 0, title: "Test", completed: false);
-    const tTodoList = [tTodoModel];
+    const tTodoTable = TodoDb(id: 0, title: "Test", completed: false);
+    final tTodo = tTodoTable.mapToEntity();
+    const tTodoList = [tTodoTable];
 
     test('should return a stream of the saved todos', () async {
       // arrange
@@ -43,12 +45,18 @@ void main() {
       // assert
       verifyZeroInteractions(mockRemoteDatasource);
       verify(mockLocalDatasource.getTodos());
-      expect(result, emitsInOrder([tTodoList, emitsDone]));
+      expect(
+        result,
+        emitsInOrder([
+          [tTodo],
+          emitsDone
+        ]),
+      );
     });
   });
 
   group('refreshTodos', () {
-    const tTodoModel = TodoModel(id: 0, title: "Test", completed: false);
+    const tTodoModel = TodoRaw(id: 0, title: "Test", completed: false);
     const tTodoList = [tTodoModel];
 
     test('should check if the device online', () async {
@@ -116,7 +124,7 @@ void main() {
   });
 
   group('addTodo', () {
-    const tTodoModel = TodoModel(id: 0, title: "Test", completed: false);
+    const tTodoModel = TodoRaw(id: 0, title: "Test", completed: false);
     const tTodoList = [tTodoModel];
 
     test('should save the data locally', () async {

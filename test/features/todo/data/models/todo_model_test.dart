@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_clean/features/todo/data/models/todo_model.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_raw.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  const tTodoModel = TodoModel(id: 1, title: "delectus aut autem", completed: false);
+  const tTodoModel = TodoRaw(id: 1, title: "delectus aut autem", completed: false);
 
   test("Should be a subclass of Todo entity", () async {
     // assert
@@ -19,7 +19,7 @@ void main() {
     final jsonMap = jsonDecode(fixture("todo.json")) as Map<String, dynamic>;
 
     // act
-    final result = TodoModel.fromJson(jsonMap);
+    final result = TodoRaw.fromJson(jsonMap);
 
     // assert
     expect(result, tTodoModel);
@@ -32,17 +32,5 @@ void main() {
     // assert
     final expectedMap = {'id': 1, 'title': 'delectus aut autem', 'completed': false};
     expect(result, expectedMap);
-  });
-
-  test('fromTodoEntity should return a valid model', () async {
-    // arrange
-    const tTodoModel = TodoModel(id: 0, title: 'Test', completed: false);
-
-    // act
-    const tTodoEntity = Todo(id: 0, title: 'Test', completed: false);
-    final result = TodoModel.fromTodoEntity(tTodoEntity);
-
-    // assert
-    expect(result, tTodoModel);
   });
 }

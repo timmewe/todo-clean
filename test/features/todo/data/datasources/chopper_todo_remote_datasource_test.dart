@@ -7,8 +7,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_clean/core/api/todo_api.dart';
 import 'package:todo_clean/core/error/exceptions.dart';
-import 'package:todo_clean/features/todo/data/datasources/chopper_todo_remote_datasource.dart';
-import 'package:todo_clean/features/todo/data/models/todo_model.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/chopper_todo_remote_datasource.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_raw.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'chopper_todo_remote_datasource_test.mocks.dart';
@@ -41,7 +41,7 @@ void main() {
 
   group('getTodos()', () {
     final tTodoListModel = [
-      TodoModel.fromJson(
+      TodoRaw.fromJson(
         jsonDecode(
           fixture('todo.json'),
         ) as Map<String, dynamic>,

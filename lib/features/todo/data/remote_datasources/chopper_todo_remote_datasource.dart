@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:todo_clean/core/api/todo_api.dart';
 import 'package:todo_clean/core/error/exceptions.dart';
-import 'package:todo_clean/features/todo/data/datasources/todo_remote_datasource.dart';
-import 'package:todo_clean/features/todo/data/models/todo_model.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_raw.dart';
+import 'package:todo_clean/features/todo/data/remote_datasources/todo_remote_datasource.dart';
 
 class ChopperTodoRemoteDatasource implements ITodoRemoteDatasource {
   final TodoApi api;
@@ -11,12 +11,13 @@ class ChopperTodoRemoteDatasource implements ITodoRemoteDatasource {
   ChopperTodoRemoteDatasource({required this.api});
 
   @override
-  Future<List<TodoModel>> getTodos() async {
+  Future<List<TodoRaw>> getTodos() async {
     final response = await api.getTodos();
     if (response.statusCode == 200) {
       final todoJsonList = jsonDecode(response.body.toString()) as List<dynamic>;
-      final todoList =
-          todoJsonList.map((json) => TodoModel.fromJson(json as Map<String, dynamic>)).toList();
+      final todoList = todoJsonList.map((json) {
+        return TodoRaw.fromJson(json as Map<String, dynamic>);
+      }).toList();
       return todoList.take(5).toList();
     } else {
       throw ServerException();
