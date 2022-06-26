@@ -17,13 +17,13 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
   final RefreshTodosUsecase refreshTodos;
 
   TodosBloc({required this.getTodos, required this.refreshTodos}) : super(const TodosState()) {
-    on<TodosSubscriptionRequested>(_onGetTodos);
+    on<RequestTodosSubscription>(_onGetTodos);
     on<RefreshTodos>(_onRefreshTodos);
 
     // add(GetTodos());
   }
 
-  Future<void> _onGetTodos(TodosSubscriptionRequested event, Emitter<TodosState> emit) async {
+  Future<void> _onGetTodos(RequestTodosSubscription event, Emitter<TodosState> emit) async {
     emit(const TodosState(status: TodosStatus.loading));
     final todosStream = getTodos(NoParams());
     await emit.forEach(

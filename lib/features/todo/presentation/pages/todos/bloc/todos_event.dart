@@ -7,6 +7,6 @@ abstract class TodosEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class TodosSubscriptionRequested extends TodosEvent {}
+class RequestTodosSubscription extends TodosEvent {}
 
 class RefreshTodos extends TodosEvent {}

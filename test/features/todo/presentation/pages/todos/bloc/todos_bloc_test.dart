@@ -39,15 +39,14 @@ void main() {
       );
 
       // act
-      bloc.add(TodosSubscriptionRequested());
+      bloc.add(RequestTodosSubscription());
       await untilCalled(mockGetTodosUsecase(any));
 
       // assert
       verify(mockGetTodosUsecase(NoParams()));
     });
 
-    test('should emit states with status [.loading, .success] when data is gotten successfully',
-        () async {
+    test('should emit states with status [.loading, .success] when data is gotten successfully', () async {
       // arrange
       when(mockGetTodosUsecase(NoParams())).thenAnswer((_) => Stream.value(tTodosList));
 
@@ -59,7 +58,7 @@ void main() {
       unawaited(expectLater(bloc.stream, emitsInOrder(expected)));
 
       // act
-      bloc.add(TodosSubscriptionRequested());
+      bloc.add(RequestTodosSubscription());
     });
   });
 

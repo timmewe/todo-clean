@@ -24,7 +24,7 @@ class TodosPage extends StatelessWidget {
   BlocProvider<TodosBloc> buildBody() {
     return BlocProvider<TodosBloc>(
       create: (_) => TodosBloc(getTodos: serviceLocator(), refreshTodos: serviceLocator())
-        ..add(TodosSubscriptionRequested())
+        ..add(RequestTodosSubscription())
         ..add(RefreshTodos()),
       child: BlocBuilder<TodosBloc, TodosState>(
         builder: (context, state) {
