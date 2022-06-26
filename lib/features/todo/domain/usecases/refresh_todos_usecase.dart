@@ -1,14 +1,17 @@
 import 'package:todo_clean/core/error/failures.dart';
 import 'package:todo_clean/core/usecases/use_case_interface.dart';
-import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
+
+abstract class IRefreshTodosUseCaseDatasource {
+  Future<Failure?> refreshTodos();
+}
 
 class RefreshTodosUsecase implements IUseCase<Failure?, NoParams> {
-  final ITodoRepository repository;
+  final IRefreshTodosUseCaseDatasource datasource;
 
-  RefreshTodosUsecase(this.repository);
+  RefreshTodosUsecase(this.datasource);
 
   @override
   Future<Failure?> call(NoParams params) {
-    return repository.refreshTodos();
+    return datasource.refreshTodos();
   }
 }

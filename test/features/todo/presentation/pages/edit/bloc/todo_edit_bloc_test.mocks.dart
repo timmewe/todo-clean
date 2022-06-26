@@ -30,7 +30,7 @@ class MockSaveTodoUsecase extends _i1.Mock implements _i3.SaveTodoUsecase {
   }
 
   @override
-  _i2.ITodoRepository get repository =>
+  _i2.ITodoRepository get datasource =>
       (super.noSuchMethod(Invocation.getter(#repository), returnValue: _FakeITodoRepository_0())
           as _i2.ITodoRepository);
   @override

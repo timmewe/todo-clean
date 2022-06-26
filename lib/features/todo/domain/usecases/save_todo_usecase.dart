@@ -1,16 +1,19 @@
 import 'package:equatable/equatable.dart';
 import 'package:todo_clean/core/usecases/use_case_interface.dart';
 import 'package:todo_clean/features/todo/domain/entities/todo.dart';
-import 'package:todo_clean/features/todo/domain/repositories/todo_repository_interface.dart';
+
+abstract class ISaveTodoUseCaseDatasource {
+  Future<void> saveTodo(Todo todo);
+}
 
 class SaveTodoUsecase implements IUseCase<void, Params> {
-  final ITodoRepository repository;
+  final ISaveTodoUseCaseDatasource datasource;
 
-  SaveTodoUsecase(this.repository);
+  SaveTodoUsecase(this.datasource);
 
   @override
   Future<void> call(Params params) {
-    return repository.saveTodo(params.todo);
+    return datasource.saveTodo(params.todo);
   }
 }
 

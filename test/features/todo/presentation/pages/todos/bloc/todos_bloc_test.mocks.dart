@@ -33,7 +33,7 @@ class MockGetTodosUsecase extends _i1.Mock implements _i3.GetTodosUsecase {
   }
 
   @override
-  _i2.ITodoRepository get repository =>
+  _i2.ITodoRepository get datasource =>
       (super.noSuchMethod(Invocation.getter(#repository), returnValue: _FakeITodoRepository_0())
           as _i2.ITodoRepository);
   @override
@@ -51,7 +51,7 @@ class MockRefreshTodosUsecase extends _i1.Mock implements _i7.RefreshTodosUsecas
   }
 
   @override
-  _i2.ITodoRepository get repository =>
+  _i2.ITodoRepository get datasource =>
       (super.noSuchMethod(Invocation.getter(#repository), returnValue: _FakeITodoRepository_0())
           as _i2.ITodoRepository);
   @override
