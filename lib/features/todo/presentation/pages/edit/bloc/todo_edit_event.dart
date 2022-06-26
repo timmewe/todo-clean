@@ -14,10 +14,12 @@ class TodoEditSetup extends TodoEditEvent {
 }
 
 class TodoEditSave extends TodoEditEvent {
-  final Todo todo;
+  final int? id;
+  final String name;
+  final bool completed;
 
-  const TodoEditSave({required this.todo});
+  const TodoEditSave({required this.id, required this.name, this.completed = false});
 
   @override
-  List<Object> get props => [todo];
+  List<Object> get props => [name, completed];
 }

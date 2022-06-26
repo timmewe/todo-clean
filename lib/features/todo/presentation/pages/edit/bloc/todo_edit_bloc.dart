@@ -23,8 +23,13 @@ class TodoEditBloc extends Bloc<TodoEditEvent, TodoEditState> {
   }
 
   Future<void> _onSave(TodoEditSave event, Emitter<TodoEditState> emit) async {
-    emit(TodoEditLoading(todo: event.todo));
-    await saveTodo(Params(todo: event.todo));
+    final todo = Todo(
+      id: event.id ?? -1,
+      title: event.name,
+      completed: event.completed,
+    );
+    emit(TodoEditLoading(todo: todo));
+    await saveTodo(Params(todo: todo));
     emit(TodoEditSaveSuccess());
   }
 }

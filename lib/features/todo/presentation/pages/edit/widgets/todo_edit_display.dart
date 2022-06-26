@@ -58,12 +58,9 @@ class _TodoEditDisplayState extends State<TodoEditDisplay> {
               ElevatedButton(
                 child: const Text('Save'),
                 onPressed: () {
-                  final todo = Todo(
-                    id: widget.todo?.id ?? -1,
-                    title: widget.textEditingController.text,
-                    completed: false,
-                  );
-                  context.read<TodoEditBloc>().add(TodoEditSave(todo: todo));
+                  final id = widget.todo?.id ?? -1;
+                  final name = widget.textEditingController.text;
+                  context.read<TodoEditBloc>().add(TodoEditSave(id: id, name: name));
                 },
               ),
           ],

@@ -56,7 +56,7 @@ void main() {
       when(mockSaveTodoUsecase.call(any)).thenAnswer((_) async => null);
 
       // act
-      bloc.add(const TodoEditSave(todo: tTodo));
+      bloc.add(const TodoEditSave(id: 0, name: 'Test'));
       await untilCalled(mockSaveTodoUsecase.call(any));
 
       // assert
@@ -74,7 +74,7 @@ void main() {
       unawaited(expectLater(bloc.stream, emitsInOrder(expected)));
 
       // act
-      bloc.add(const TodoEditSave(todo: tTodo));
+      bloc.add(const TodoEditSave(id: 0, name: 'Test'));
     });
   });
 }
